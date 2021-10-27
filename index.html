@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Meme</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">logo</div>
+        <button class="gallery-btn-head">Gallery</button>
+        <button class="about-btn-head">About</button>
+    </header>
+    <main>
+        <section class="gallery-container">
+            <div class="opt-gallery">
+                <div class="search-gallery">
+                    <input type="search" name="search" id="search" placeholder="search">
+                </div>
+                <div class="opt-search-gallery">
+                    <button class="more-opt-search">More</button>
+                    <div onclick="onFilterBy('men')">Men</div>
+                    <div onclick="onFilterBy('comic')">comic</div>
+                    <div onclick="onFilterBy('funny')">Funny</div>
+                    <div onclick="onFilterBy('animal')">Animal</div>
+                    <div onclick="onFilterBy('smile')">smile</div>
+                    <div onclick="onFilterBy('women')">Women</div>
+                </div>
+
+            </div>
+            <div class="container-images">
+
+
+            </div>
+        </section>
+        <section class="editor-gallery-container">
+            <canvas class="container-canvas" height="400" width="400" style="background-color: aquamarine;"></canvas>
+            <div class="editor-canvas">
+                <div class="input-txt-canvas">
+                    <input type="text" name="text" id="text-canvas" onkeyup="onChangeTxt(this.value)">
+                </div>
+
+                <div class="container-btn-add-remove-lines">
+                    <div class="btn-change-focus-txt" onclick="changeLine()">#</div>
+                    <div class="btn-add-more-line-txt" onclick="addLine()">+</div>
+                    <div class="delete-line-txt" onclick="deleteLine()"> delete</div>
+                </div>
+
+                <div class="container-tools-edit-canvas">
+                    <div class="increase-letters" onclick="incDecLetters(1)">A+</div>
+                    <div class="decrease-letters" onclick="incDecLetters(0)">A-</div>
+                    <div class="ltr-letters" onclick="alignLetters('left')"> ltr </div>
+                    <div class="center-letters" onclick="alignLetters('center')"> center </div>
+                    <div class="rtl-letters" onclick="alignLetters('right')">rtl </div>
+
+                    <div class="inside-tools">
+                        <select name="font" id="font" onchange="onChangeFont(this.value)">
+                            <option value="Impact">Impact</option>
+                            <option value="Ariel">Ariel</option>
+                            <option value="David">David</option>
+                        </select>
+                        <div class="s">s</div>
+                        <!-- <div class="color-txt">color</div> -->
+                        <input type="color" name="color" id="color-txt" onchange="changeColor(this.value)">
+                    </div>
+                    <div class="opt-stickers">
+                        <div class="stic1">👸</div>
+
+                        <div class="stic2">🤵 </div>
+                        <div class="stic3"> 👰</div>
+                        <div class="stic4">👨‍⚖️ </div>
+                    </div>
+                    <div class="btn-down-and-shere">
+
+                        <div class="share-container"> </div>
+                        <h5 class="user-msg"></h5>
+                        <a href="#" onclick="downloadCanvas(this)" download='MyCanvas'>download</a>
+                        <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+                        <button class="btn" onclick="uploadImg()">Upload Image from Canvas</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="./js/controler-main.js"></script>
+    <script src="./js/upDown-services.js"></script>
+    <!--<script src="./js/storege-services.js"></script>-->
+    <script src="./js/app-services.js"></script>
+</body>
+
+</html>
