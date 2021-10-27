@@ -35,7 +35,7 @@ function onEditIncanvas(id) {
     if (id) {
         gMeme.selectedImgId = id
     }
-    make_base(`./img/meme-imgs/${gMeme.selectedImgId}.jpg`)
+    make_base(`../img/meme-imgs/${gMeme.selectedImgId}.jpg`)
     document.querySelector('.gallery-container').style.display = 'none'
     document.querySelector('.editor-gallery-container').style.display = 'flex'
 }
