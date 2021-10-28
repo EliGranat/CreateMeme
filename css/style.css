@@ -25,9 +25,7 @@ header {
     background: linear-gradient(90deg, rgba(17, 157, 175, 1) 0%, rgba(33, 173, 144, 1) 52%, rgba(46, 185, 121, 1) 100%);
     width: 100%;
     height: 75px;
-    border-radius: 27px;
     border: solid 1px #707070;
-    /* box-shadow: inset 0.63px 11.98px 16px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,7 +41,6 @@ header {
 }
 
 .btn-header {
-    margin-inline-end: 230px;
     font-size: 1.31rem;
 }
 
@@ -52,8 +49,10 @@ header {
     width: 7.31em;
     border-radius: 3em;
     color: #21ac91;
-    margin-right: 42px;
 }
+
+
+/* /////// container gallery buttons and search \\\\\\\\\ */
 
 .gallery-container {
     border-radius: 9px;
@@ -64,9 +63,8 @@ header {
     background-color: #383B42;
 }
 
-.opt-gallery {
+.container-btn-galery {
     width: 100%;
-    height: 100px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -78,8 +76,6 @@ header {
 
 .search-gallery input {
     height: 3.12rem;
-    width: 27.5rem;
-    padding-left: 30px;
     background-color: #22252C;
     border-radius: 3em;
     font-size: 1.31rem;
@@ -103,8 +99,6 @@ header {
 }
 
 .opt-search-gallery {
-    height: 3.12rem;
-    width: 28.5rem;
     background-color: #87898d;
     border-radius: 3em;
 }
@@ -119,7 +113,6 @@ header {
 
 .more-opt-search {
     font-size: 1.125rem;
-    height: 2.25em;
     width: 5.75em;
     border-radius: 3em;
     background: rgb(17, 157, 175);
@@ -127,41 +120,37 @@ header {
 }
 
 
-/* images container main */
-
-.container-scrool {
-    height: 65vh;
-    overflow: scroll;
-}
+/* /////// container gallery imgs main \\\\\\\\\ */
 
 .container-images {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
     gap: 28px;
 }
 
 .container-images img {
-    height: 170px;
     width: 200px;
     border-radius: 1rem;
 }
 
 
-/* canvas img */
+/* /////// container canvas ALL \\\\\\\\\ */
+
+.editor-gallery-container {
+    display: none;
+    justify-content: center;
+}
+
+
+/* /////// canvas img  \\\\\\\\\ */
 
 .container-canvas {
     border-radius: 3rem;
 }
 
 
-/* canvas container */
-
-.editor-gallery-container {
-    display: none;
-    justify-content: center;
-}
+/* /////// container canvas editor \\\\\\\\\ */
 
 .editor-canvas {
     width: 32.81rem;
@@ -169,7 +158,6 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-inline-start: 70px;
     border-radius: 3rem;
     font-family: fa-solid;
 }
@@ -235,7 +223,7 @@ header {
 }
 
 
-/* ////////// editor tools////////// */
+/* ////////// editor tools canvas \\\\\\\\ */
 
 .container-tools-edit-canvas>div {
     height: 55px;
@@ -319,9 +307,6 @@ header {
     content: '\f53f'
 }
 
-
-/* #color-txt */
-
 .container-tools-edit-canvas {
     width: 80%;
     display: flex;
@@ -333,7 +318,6 @@ header {
 }
 
 .inside-tools {
-    /* justify-content: center; */
     display: flex;
     width: 100%;
 }
@@ -354,9 +338,7 @@ header {
 
 .btn-down-and-shere {
     display: flex;
-    /* justify-content: space-between; */
     width: 80%;
-    /* background-color: coral; */
 }
 
 .btn-down-and-shere>* {
@@ -440,4 +422,172 @@ header {
  ::-webkit-scrollbar-thumb:hover {
     background: rgb(5, 184, 255);
     background: linear-gradient(90deg, rgba(17, 157, 175, 1) 0%, rgba(33, 173, 144, 1) 52%, rgba(46, 185, 121, 1) 100%);
+}
+
+
+/* screens  */
+
+.screen-background {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(58, 50, 40, 0.5);
+    top: 0;
+    right: 0;
+    z-index: 1;
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .6s;
+}
+
+body.menu-open .screen-background {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+
+/* ////////// mobile  s  //////////// */
+
+@media (max-width:740px) {
+    body {
+        margin: 0;
+    }
+    .container-btn-galery {
+        flex-direction: column;
+    }
+    .container-images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .btn-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background-color: brown;
+        z-index: 1;
+        width: 200px;
+        justify-content: space-around;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform .8s, box-shadow .9s;
+    }
+    body.menu-open .btn-header {
+        transform: translateX(0);
+    }
+    .btn-logo-mobile {
+        font-family: fa-solid;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 55px;
+        height: 55px;
+        font-size: 30px;
+        margin-top: 20px;
+    }
+    .btn-logo-mobile::after {
+        content: '\f0c9';
+    }
+    .search-gallery input {
+        width: 27.5rem;
+        padding: 10px;
+        margin: 5px;
+    }
+    .container-btn-galery {
+        margin: 10px;
+    }
+    .opt-gallery {
+        display: flex;
+        margin: 10px;
+    }
+    .opt-search-gallery {
+        width: 350px;
+        height: 30px;
+    }
+    .more-opt-search {
+        height: 25px;
+        width: 80px;
+        margin-inline-start: 5px;
+        color: #ffffff;
+        font-size: 0.75rem;
+    }
+    .opt-search-gallery div {
+        padding: 7px;
+    }
+    .container-images img {
+        height: 200px;
+    }
+    .editor-gallery-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+/* ////////// mobile  L  //////////// */
+
+@media (min-width:740px) {
+    .gallery-container {
+        width: 830px;
+    }
+    .container-btn-galery {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .container-images {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .btn-header {
+        margin-inline-end: 230px;
+    }
+    .container-btn-galery {
+        height: 100px;
+    }
+    .opt-gallery {
+        display: flex;
+    }
+    .opt-search-gallery {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+
+/* ////////// mobile  XL  //////////// */
+
+@media (min-width:980px) {
+    .gallery-container {
+        width: 100%;
+    }
+    header {
+        border-radius: 27px;
+    }
+    .btn-header button {
+        margin-right: 42px;
+    }
+    .search-gallery input {
+        width: 27.5rem;
+        padding-left: 30px;
+    }
+    .opt-search-gallery {
+        height: 3.12rem;
+        width: 28.5rem;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+    .more-opt-search {
+        height: 2.25em;
+    }
+    .container-images img {
+        height: 170px;
+    }
+    .container-scrool {
+        height: 65vh;
+        overflow: scroll;
+    }
+    .editor-canvas {
+        margin-inline-start: 70px;
+    }
 }
