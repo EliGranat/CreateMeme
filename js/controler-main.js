@@ -29,6 +29,7 @@ function init() {
     elImagesGrid.scrollIntoView()
 }
 
+
 ////////////////// filter by /////////////////////
 function onFilterBy(filter) {
     changeFilter(filter)
@@ -119,6 +120,18 @@ function drawFocus(x, y) {
     gCtx.lineTo(x + 470, y - 20);
     gCtx.strokeStyle = '#ffffff';
     gCtx.stroke()
+}
+
+// ////////////////btn nav/////////////////////////
+
+function goToGalleryBtn() {
+    document.querySelector('.gallery-container').style.display = 'flex'
+    document.querySelector('.editor-gallery-container').style.display = 'none'
+    document.body.classList.remove('menu-open')
+}
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
 }
 ////////////////// on change TXT LINE... /////////////////////
 
