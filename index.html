@@ -11,30 +11,35 @@
 
 <body>
     <header>
+        <div class="screen-background" onclick="toggleMenu()"></div>
         <div class="logo">logo</div>
+        <div class="btn-logo-mobile" onclick="toggleMenu()"></div>
         <div class="btn-header">
 
-            <button class="gallery-btn-head">Gallery</button>
+            <button class="gallery-btn-head" onclick="goToGalleryBtn()">Gallery</button>
             <a class="about-btn-head">About</a>
         </div>
     </header>
     <main>
         <section class="gallery-container">
-            <div class="opt-gallery">
+            <div class=" container-btn-galery">
                 <div class="search-gallery">
 
                     <input type="search" name="search" id="search" placeholder="Search">
                     <button onclick="search()"></button>
                 </div>
-                <div class="opt-search-gallery">
-                    <div onclick="onFilterBy('men',this)" class="men">Men</div>
-                    <div onclick="onFilterBy('comic',this)" class="comic">comic</div>
-                    <div onclick="onFilterBy('funny',this)" class="funny">Funny</div>
-                    <div onclick="onFilterBy('animal',this)" class="animal">Animal</div>
-                    <div onclick="onFilterBy('smile',this)" class="smile">smile</div>
-                    <div onclick="onFilterBy('women',this)" class="women">Women</div>
+                <div class="opt-gallery">
+
+                    <div class="opt-search-gallery">
+                        <div onclick="onFilterBy('men',this)" class="men">Men</div>
+                        <div onclick="onFilterBy('comic',this)" class="comic">comic</div>
+                        <div onclick="onFilterBy('funny',this)" class="funny">Funny</div>
+                        <div onclick="onFilterBy('animal',this)" class="animal">Animal</div>
+                        <div onclick="onFilterBy('smile',this)" class="smile">smile</div>
+                        <div onclick="onFilterBy('women',this)" class="women">Women</div>
+                    </div>
+                    <button class="more-opt-search">More</button>
                 </div>
-                <button class="more-opt-search">More</button>
 
             </div>
             <div class="container-scrool">
