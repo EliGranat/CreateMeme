@@ -12,6 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-appearance: none;
 }
 
 body {
@@ -176,10 +177,10 @@ header {
 }
 
 .container-btn-add-remove-lines div {
-    height: 55px;
-    width: 55px;
-    font-size: 30px;
-    margin: 15px 15px 25px 15px;
+    height: 3.43rem;
+    width: 3.43rem;
+    font-size: 1.87rem;
+    margin: .93rem .93rem 1.56rem .93rem;
     cursor: pointer;
     border-radius: 1rem;
     display: flex;
@@ -226,10 +227,10 @@ header {
 /* ////////// editor tools canvas \\\\\\\\ */
 
 .container-tools-edit-canvas>div {
-    height: 55px;
-    width: 55px;
-    font-size: 25px;
-    margin: 10px 10px 25px 10px;
+    height: 3.43rem;
+    width: 3.43rem;
+    font-size: 1.56rem;
+    margin: .62rem .62rem 1.56rem .62rem;
     cursor: pointer;
     border-radius: 1rem;
     display: flex;
@@ -262,20 +263,20 @@ header {
 #font {
     width: 14.625rem;
     font-size: 1.7rem;
-    height: 55px;
+    height: 3.43rem;
     border-radius: 1rem;
-    margin: 0 15px 10px;
+    margin: 0 .62rem .62rem;
     text-transform: uppercase;
 }
 
 .save-user {
-    height: 55px;
-    padding: 20px;
+    height: 3.43rem;
+    padding: 1.25rem;
     display: flex;
-    margin-right: 20px;
+    margin-right: 1.25rem;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 2.5rem;
     border-radius: 0.5rem;
     box-shadow: 0px 3px 6px #00000041;
 }
@@ -289,12 +290,12 @@ header {
 
 .color-text-btn {
     position: absolute;
-    height: 55px;
-    width: 60px;
+    height: 3.43rem;
+    width: 3.75rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 2.5rem;
     z-index: 1;
     pointer-events: none;
     background: rgb(46, 198, 66);
@@ -353,7 +354,7 @@ header {
     width: 6rem;
     background-color: #1E7CD3;
     border-radius: 1rem;
-    margin: 10px 0;
+    margin: 0.625rem 0;
 }
 
 .share-container::before {
@@ -380,7 +381,7 @@ header {
     width: 7rem;
     background-color: #8F44BB;
     border-radius: 1rem;
-    margin: 10px 0;
+    margin: 0.62rem 0;
 }
 
 .btn {
@@ -389,7 +390,7 @@ header {
     width: 7rem;
     background-color: #8F44BB;
     border-radius: 1rem;
-    margin: 10px 0;
+    margin: 0.62rem 0;
     margin-left: 10px;
 }
 
@@ -467,7 +468,7 @@ body.menu-open .screen-background {
         flex-direction: column;
         height: 100%;
         background-color: brown;
-        z-index: 1;
+        z-index: 2;
         width: 200px;
         justify-content: space-around;
         align-items: center;
@@ -479,7 +480,7 @@ body.menu-open .screen-background {
     }
     .btn-logo-mobile {
         font-family: fa-solid;
-        position: fixed;
+        position: static;
         right: 0;
         top: 0;
         width: 55px;
@@ -491,7 +492,7 @@ body.menu-open .screen-background {
         content: '\f0c9';
     }
     .search-gallery input {
-        width: 27.5rem;
+        width: 20rem;
         padding: 10px;
         margin: 5px;
     }
@@ -503,7 +504,7 @@ body.menu-open .screen-background {
         margin: 10px;
     }
     .opt-search-gallery {
-        width: 350px;
+        width: 300px;
         height: 30px;
     }
     .more-opt-search {
@@ -517,16 +518,27 @@ body.menu-open .screen-background {
         padding: 7px;
     }
     .container-images img {
-        height: 200px;
+        height: 150px;
+        width: 150px;
     }
     .editor-gallery-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
+    }
+    .editor-gallery-container>* {
+        width: 380px;
+        margin: 0 10px;
+    }
+    .input-txt-canvas input {
+        width: 20.75rem;
+    }
+    html {
+        font-size: 12px;
     }
 }
 
 
-/* ////////// mobile  L  //////////// */
+/* ////////// tablet  L  //////////// */
 
 @media (min-width:740px) {
     .gallery-container {
@@ -555,7 +567,7 @@ body.menu-open .screen-background {
 }
 
 
-/* ////////// mobile  XL  //////////// */
+/* ////////// desktop  XL  //////////// */
 
 @media (min-width:980px) {
     .gallery-container {
