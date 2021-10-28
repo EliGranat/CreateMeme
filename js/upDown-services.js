@@ -42,7 +42,6 @@ function onImgInput(ev) {
 }
 
 function loadImageFromInput(ev, onImageReady) {
-    console.log(onImageReady);
     document.querySelector('canvas').innerHTML = ''
     var reader = new FileReader()
 
@@ -54,8 +53,6 @@ function loadImageFromInput(ev, onImageReady) {
     }
     reader.readAsDataURL(ev.target.files[0])
 }
-
-
 
 function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
