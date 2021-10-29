@@ -15,18 +15,18 @@
         <div class="logo">logo</div>
         <div class="btn-logo-mobile" onclick="toggleMenu()"></div>
         <div class="btn-header">
-
-            <button class="gallery-btn-head" onclick="goToGalleryBtn()">Gallery</button>
+            <button class="gallery-btn-head selected-btn-gallery" onclick="goToGalleryBtn()">Gallery</button>
+            <button class="gallery-btn-head " onclick="onMyMemesBtn()">Memes</button>
             <a class="about-btn-head">About</a>
         </div>
     </header>
     <main>
-        <section class="gallery-container">
+        <section class="gallery-container ">
             <div class=" container-btn-galery">
                 <div class="search-gallery">
 
                     <input type="search" name="search" id="search" placeholder="Search">
-                    <button onclick="search()"></button>
+                    <button onclick="onSearch()"></button>
                 </div>
                 <div class="opt-gallery">
 
@@ -37,24 +37,23 @@
                         <div onclick="onFilterBy('animal',this)" class="animal">Animal</div>
                         <div onclick="onFilterBy('smile',this)" class="smile">smile</div>
                         <div onclick="onFilterBy('women',this)" class="women">Women</div>
+                        <div onclick="onFilterBy('all',this)" class="all">All</div>
                     </div>
-                    <button class="more-opt-search">More</button>
+                    <button class="more-opt-search" onclick="showMoreFilter()">More</button>
                 </div>
 
             </div>
             <div class="container-scrool">
-
-                <div class="container-images">
-
-
-                </div>
+                <div class="container-images"></div>
             </div>
         </section>
         <section class="editor-gallery-container">
-            <canvas class="container-canvas" height="500" width="500" style="background-color: aquamarine;"></canvas>
+            <canvas class="container-canvas" height="500" width="500" style="background-color: aquamarine;">
+            </canvas>
+            <div class="hide-show-focus" onclick="hideFocus()"></div>
             <div class="editor-canvas">
                 <div class="input-txt-canvas">
-                    <input type="text" name="text" id="text-canvas" onkeyup="onChangeTxt(this.value)">
+                    <input type="text" name="text" id="text-canvas" onfocus="this.setSelectionRange(0, this.value.length)" onkeyup="onChangeTxt(this.value)">
                 </div>
 
                 <div class="container-btn-add-remove-lines">
@@ -66,9 +65,9 @@
                 <div class="container-tools-edit-canvas">
                     <div class="increase-letters" onclick="incDecLetters(1)"></div>
                     <div class="decrease-letters" onclick="incDecLetters(0)"></div>
-                    <div class="ltr-letters" onclick="alignLetters('left')"> </div>
-                    <div class="center-letters" onclick="alignLetters('center')"> </div>
-                    <div class="rtl-letters" onclick="alignLetters('right')"> </div>
+                    <div class="ltr-letters" onclick="onAlignLetters('left')"> </div>
+                    <div class="center-letters" onclick="onAlignLetters('center')"> </div>
+                    <div class="rtl-letters" onclick="onAlignLetters('right')"> </div>
 
                     <section class="inside-tools">
                         <select name="font" id="font" onchange="onChangeFont(this.value)">
@@ -76,37 +75,44 @@
                             <option value="Ariel">Ariel</option>
                             <option value="David">David</option>
                         </select>
-                        <div class="save-user">s</div>
-                        <!-- <div class="color-txt">color</div> -->
+                        <div class="save-user" onclick="onSaveMeme()">s</div>
                         <div class="pos-color">
                             <div class="color-text-btn">
                             </div>
-                            <input type="color" name="color" id="color-txt" onchange="changeColor(this.value)">
+                            <input type="color" name="color" id="color-txt" onchange="onChangeColor(this.value)">
                         </div>
 
                     </section>
                 </div>
-
-                <div class="opt-stickers">
-                    <div class="stic1">👸</div>
-
-                    <div class="stic2">🤵 </div>
-                    <div class="stic3"> 👰</div>
-                    <div class="stic4">👨‍⚖️ </div>
+                <div class="scroll-emoj">
+                    <div class="opt-stickers">
+                        <div onclick="onAddSmiley('🤑')">🤑</div>
+                        <div onclick="onAddSmiley('🤡')">🤡</div>
+                        <div onclick="onAddSmiley('🎅🏼')">🎅🏼</div>
+                        <div onclick="onAddSmiley('💥')">💥</div>
+                        <div onclick="onAddSmiley('💜')">💜</div>
+                        <div onclick="onAddSmiley('💙')">💙</div>
+                        <div onclick="onAddSmiley('💛')">💛</div>
+                        <div onclick="onAddSmiley('❤️')">❤️</div>
+                        <div onclick="onAddSmiley('🧡')">🧡</div>
+                    </div>
                 </div>
                 <div class="btn-down-and-shere">
 
-                    <div class="share-container"> Shere</div>
-                    <h5 class="user-msg" hidden></h5>
-                    <a href="#" onclick="downloadCanvas(this)" download='MyCanvas'> Download</a>
-                    <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+                    <div class="share-container "> Shere</div>
+                    <a href="#" onclick="onDownloadCanvas(this)" download='MyCanvas' class="down"> Download</a>
+                    <div class="box-input-file">
+                        <h4>Input</h4>
+
+                        <input type="file" class="file-input" name="image" onchange="onImgInput(event)" />
+                    </div>
                     <button class="btn" onclick="uploadImg()">Upload</button>
                 </div>
             </div>
             </div>
         </section>
     </main>
-    <!--<script src="./js/storege-services.js"></script>-->
+    <script src="./js/storege-services.js"></script>
     <script src="./js/util-service.js"></script>
     <script src="./js/app-services.js"></script>
     <script src="./js/upDown-services.js"></script>
