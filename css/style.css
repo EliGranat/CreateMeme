@@ -75,6 +75,10 @@ body.selected-btn-memes .gallery-btn-head:nth-child(2) {
     cursor: pointer;
 }
 
+.about-btn-head {
+    color: #ffffff;
+}
+
 
 /* /////// container gallery buttons and search \\\\\\\\\ */
 
