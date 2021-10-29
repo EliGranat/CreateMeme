@@ -13,6 +13,7 @@
     padding: 0;
     box-sizing: border-box;
     -webkit-appearance: none;
+    text-decoration: none;
 }
 
 body {
@@ -24,7 +25,7 @@ body {
 header {
     background: rgb(17, 157, 175);
     background: linear-gradient(90deg, rgba(17, 157, 175, 1) 0%, rgba(33, 173, 144, 1) 52%, rgba(46, 185, 121, 1) 100%);
-    width: 100%;
+    /* width: 100%; */
     height: 75px;
     border: solid 1px #707070;
     display: flex;
@@ -33,6 +34,10 @@ header {
     margin-bottom: 20px;
     color: #ffffff;
     font-family: Poppins-Medium;
+}
+
+header>* {
+    cursor: pointer;
 }
 
 .logo {
@@ -45,11 +50,29 @@ header {
     font-size: 1.31rem;
 }
 
+.gallery-btn-head {
+    border: none;
+}
+
+.gallery-btn-head:hover {
+    background-color: rgba(209, 255, 163, 0.322);
+    color: rgba(63, 63, 119, 0.589);
+}
+
+body.selected-btn-gallery .gallery-btn-head:first-child {
+    background-color: darkgreen;
+}
+
+body.selected-btn-memes .gallery-btn-head:nth-child(2) {
+    background-color: darkgreen;
+}
+
 .btn-header button {
     height: 2.37em;
     width: 7.31em;
     border-radius: 3em;
     color: #21ac91;
+    cursor: pointer;
 }
 
 
@@ -80,6 +103,7 @@ header {
     background-color: #22252C;
     border-radius: 3em;
     font-size: 1.31rem;
+    border: none;
 }
 
 .search-gallery button {
@@ -93,6 +117,7 @@ header {
     border: none;
     color: rgb(17, 157, 175);
     color: linear-gradient(90deg, rgba(17, 157, 175, 1) 0%, rgba(33, 173, 144, 1) 52%, rgba(46, 185, 121, 1) 100%);
+    cursor: pointer;
 }
 
 .search-gallery button::after {
@@ -102,10 +127,13 @@ header {
 .opt-search-gallery {
     background-color: #87898d;
     border-radius: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .opt-search-gallery div {
-    padding: 15px;
+    margin: 0.2em 0.2em;
     cursor: pointer;
     display: inline-block;
     color: #FEFEFE;
@@ -118,6 +146,8 @@ header {
     border-radius: 3em;
     background: rgb(17, 157, 175);
     background: linear-gradient(90deg, rgba(17, 157, 175, 1) 0%, rgba(33, 173, 144, 1) 52%, rgba(46, 185, 121, 1) 100%);
+    cursor: pointer;
+    border: none;
 }
 
 
@@ -133,6 +163,7 @@ header {
 .container-images img {
     width: 200px;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 
@@ -145,6 +176,18 @@ header {
 
 
 /* /////// canvas img  \\\\\\\\\ */
+
+.hide-show-focus {
+    height: 30px;
+    width: 30px;
+    font-family: fa-solid;
+    font-size: 2rem;
+    right: 10px;
+}
+
+.hide-show-focus::after {
+    content: '\f070';
+}
 
 .container-canvas {
     border-radius: 3rem;
@@ -323,18 +366,30 @@ header {
     width: 100%;
 }
 
+.inside-tools>* {
+    cursor: pointer;
+}
+
+.scroll-emoj {
+    width: 80%;
+}
+
 .opt-stickers {
     display: flex;
-    justify-content: space-around;
     background-color: #8076FD;
-    width: 80%;
     border-radius: 3rem;
+    width: 100%;
     margin-bottom: 1.25rem;
+    overflow: scroll;
+    overflow-y: hidden;
 }
 
 .opt-stickers>div {
     font-size: 3.43rem;
     height: 5.5rem;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .btn-down-and-shere {
@@ -346,6 +401,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .share-container {
@@ -361,27 +417,39 @@ header {
     content: ' \f1e0 ';
 }
 
-.btn-down-and-shere a {
+.btn-down-and-shere .down {
     font-size: 1.31rem;
     height: 3.1rem;
     width: 8rem;
-    background-color: #8F44BB;
+    background-color: #bb9544;
     border-radius: 1rem;
     margin: 10px 10px;
     text-decoration: none;
 }
 
-.btn-down-and-shere a::before {
+.btn-down-and-shere .down::before {
     content: ' \f019 ';
 }
 
-.file-input {
+.box-input-file input {
+    opacity: 0;
+    width: 80px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.box-input-file {
     font-size: 1.31rem;
     height: 3.1rem;
     width: 7rem;
-    background-color: #8F44BB;
+    background-color: #44bb4e;
     border-radius: 1rem;
     margin: 0.62rem 0;
+    cursor: pointer;
+}
+
+.box-input-file::before {
+    content: '\f093';
 }
 
 .btn {
@@ -392,6 +460,7 @@ header {
     border-radius: 1rem;
     margin: 0.62rem 0;
     margin-left: 10px;
+    border: none;
 }
 
 
@@ -504,8 +573,10 @@ body.menu-open .screen-background {
         margin: 10px;
     }
     .opt-search-gallery {
-        width: 300px;
+        width: 250px;
         height: 30px;
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
     .more-opt-search {
         height: 25px;
@@ -535,14 +606,26 @@ body.menu-open .screen-background {
     html {
         font-size: 12px;
     }
+    body.show-more-filter .opt-search-gallery {
+        height: 50px;
+    }
 }
 
 
 /* ////////// tablet  L  //////////// */
 
 @media (min-width:740px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+    }
+    header {
+        width: 100vw;
+    }
     .gallery-container {
-        width: 830px;
+        width: 100vw;
     }
     .container-btn-galery {
         flex-direction: row;
@@ -563,17 +646,42 @@ body.menu-open .screen-background {
     .opt-search-gallery {
         margin-left: 20px;
         margin-right: 20px;
+        width: 300px;
+        height: 30px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    body.show-more-filter .opt-search-gallery {
+        height: 50px;
+    }
+    @media (max-width:1100px) {
+        .editor-gallery-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        .editor-gallery-container>* {
+            width: 500px;
+            margin: 0 10px;
+        }
     }
 }
 
 
 /* ////////// desktop  XL  //////////// */
 
-@media (min-width:980px) {
+@media (min-width:1100px) {
+    body {
+        margin: 10px;
+    }
     .gallery-container {
-        width: 100%;
+        width: 100vw;
+        max-height: 566px;
+        max-width: 1243px;
+        margin-left: 10px;
     }
     header {
+        width: 100vw;
+        max-width: 1243px;
         border-radius: 27px;
     }
     .btn-header button {
@@ -601,5 +709,8 @@ body.menu-open .screen-background {
     }
     .editor-canvas {
         margin-inline-start: 70px;
+    }
+    body.show-more-filter .opt-search-gallery {
+        width: 500px;
     }
 }
