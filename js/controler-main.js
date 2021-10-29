@@ -5,32 +5,21 @@ var gElCanvas;
 var gCtx;
 var gisDrag = false
 var gStartPos
-var gMeme = {
-    selectedImgId: 5,
-    selectedLineIdx: 0,
-    lines: [{
-        txt: 'hallo',
-        size: 20,
-        align: 'left',
-        color: 'red',
-        font: 'Impact',
-        pos: { x: 10, y: 40 }
-    }]
-}
+var gShowFocus = true
+var meme = gettGmeme()
 
 window.onload = init
 
 function init() {
+    document.body.classList.add('selected-btn-gallery')
     gElCanvas = document.querySelector('.container-canvas')
     gCtx = gElCanvas.getContext('2d')
-
     randerGridImg()
     addListeners()
-    elImagesGrid.scrollIntoView()
 }
 
-
 ////////////////// filter by /////////////////////
+
 function onFilterBy(filter) {
     changeFilter(filter)
     randerGridImg()
@@ -46,6 +35,7 @@ function onFilterBy(filter) {
         elFilter.style.fontSize = fontSizeFilterC
     }
 }
+
 ////////////////// render grid imgs /////////////////////
 
 function randerGridImg() {
@@ -56,15 +46,16 @@ function randerGridImg() {
     })
     elImagesGrid.innerHTML = elGridImgHtml
 }
+
 ////////////////// on click update on canvas first img after txt /////////////////////
 
 function onEditInCanvas(id, pos = { x: 10, y: 40 }) {
     if (id) {
-        gMeme.selectedImgId = id
+        meme.selectedImgId = id
+        document.querySelector('.gallery-container').style.display = 'none'
+        document.querySelector('.editor-gallery-container').style.display = 'flex'
     }
-    make_base(`./img/meme-imgs/${gMeme.selectedImgId}.jpg`, pos.x, pos.y)
-    document.querySelector('.gallery-container').style.display = 'none'
-    document.querySelector('.editor-gallery-container').style.display = 'flex'
+    make_base(`./img/meme-imgs/${meme.selectedImgId}.jpg`, pos.x, pos.y)
 }
 
 function make_base(imgEdit, posX, posY) {
@@ -72,54 +63,57 @@ function make_base(imgEdit, posX, posY) {
     base_image.src = imgEdit
     base_image.onload = function() {
         gCtx.drawImage(base_image, 0, 0);
-        ceangeLoc(posX, posY)
+        // ceangeLoc(posX, posY)
         randerTxtInCanvas(posX, posY)
     }
 }
+
 ////////////////// rander txt on canvas /////////////////////
 
 function randerTxtInCanvas() {
 
-    gMeme.lines.forEach((line, idx) => {
+    meme.lines.forEach((line, idx) => {
         drawText(line.txt, line.size, line.color, line.pos.x, line.pos.y, line.align, idx, line.font)
     })
 }
+
 ////////////////// draw text and line focus /////////////////////
 
 function drawText(txt, size, color, x, y, align, line, font) {
-    if (align === 'left') {
-        x = 15
+    if (align === ' right') {
+        x = x + 180
+    } else if (align === 'left') {
+        x = x - 180
+    } else if (align === 'center') {
+        x = 45
     }
-    if (align === 'right') {
-        x = 383
-    }
-    if (align === 'center') {
-        x = 200
-    }
-    if (line === gMeme.selectedLineIdx) {
+    if (line === gettSelected() && gShowFocus) {
         drawFocus(x, y)
+        drewLineMove()
     }
+
     gCtx.lineWidth = 1;
     gCtx.strokeStyle = 'white'
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font} `
-    gCtx.fillText(txt, x, y)
-    gCtx.strokeText(txt, x, y)
+    gCtx.fillText(txt, x + 190, y + 30)
+    gCtx.strokeText(txt, x + 190, y + 30)
 }
 
 function drawFocus(x, y) {
+    gCtx.strokeStyle = '#000000';
+    gCtx.strokeRect(x - 300, y - 20, 1000, 80);
+}
+
+function drewLineMove() {
+    gCtx.strokeStyle = '#000000';
+    gCtx.lineWidth = 12;
+
     gCtx.beginPath();
-    gCtx.lineWidth = 2
-    gCtx.moveTo(x - 10, y - 20);
-    gCtx.lineTo(x + 470, y - 20);
-    gCtx.moveTo(x - 10, y - 20);
-    gCtx.lineTo(x - 10, y + 80);
-    gCtx.moveTo(x - 10, y + 80);
-    gCtx.lineTo(x + 470, y + 80);
-    gCtx.moveTo(x + 470, y + 80);
-    gCtx.lineTo(x + 470, y - 20);
-    gCtx.strokeStyle = '#ffffff';
-    gCtx.stroke()
+    gCtx.moveTo(8, 0);
+    gCtx.lineTo(8, 498);
+    gCtx.stroke();
+    gCtx.closePath();
 }
 
 // ////////////////btn nav/////////////////////////
@@ -127,110 +121,105 @@ function drawFocus(x, y) {
 function goToGalleryBtn() {
     document.querySelector('.gallery-container').style.display = 'flex'
     document.querySelector('.editor-gallery-container').style.display = 'none'
+    document.body.classList.remove('selected-btn-memes')
+    document.body.classList.add('selected-btn-gallery')
     document.body.classList.remove('menu-open')
+    showMyMemes(false)
+    randerGridImg()
+
 }
 
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
 }
-////////////////// on change TXT LINE... /////////////////////
 
-function onChangeTxt(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt
+////////////////// ON EVENT FUNCTION /////////////////////
+
+function onMyMemesBtn() {
+    showMyMemes(true)
+    randerGridImg()
+    document.querySelector('.gallery-container').style.display = 'flex'
+    document.querySelector('.editor-gallery-container').style.display = 'none'
+    document.body.classList.remove('selected-btn-gallery')
+    document.body.classList.add('selected-btn-memes')
+}
+
+function onSaveMeme() {
+    saveMeme()
+}
+
+function onSearch() {
+    var searchVal = document.getElementById('search')
+    search(searchVal.value.toLowerCase())
+    searchVal.value = ''
+    randerGridImg()
+}
+
+function showMoreFilter() {
+    document.body.classList.toggle('show-more-filter')
+
+}
+
+function hideFocus() {
+    gShowFocus = !gShowFocus
     onEditInCanvas()
 }
 
+function onAddSmiley(Smiley) {
+    addLine(Smiley)
+    onEditInCanvas()
+}
+
+function onChangeTxt(newTxt) {
+    changeTxt(newTxt)
+    onEditInCanvas()
+}
+
+
 function onChangeLine() {
-    if (gMeme.selectedLineIdx === 0 && gMeme.lines.length === 1) {
-        gMeme.selectedLineIdx = 0
-    } else if (gMeme.selectedLineIdx === 0 && gMeme.lines.length === 2) {
-        gMeme.selectedLineIdx = 1
-    } else if (gMeme.selectedLineIdx === 0 && gMeme.lines.length === 3) {
-        gMeme.selectedLineIdx = 2
-    } else if (gMeme.selectedLineIdx === 2) {
-        gMeme.selectedLineIdx = 1
-    } else if (gMeme.selectedLineIdx === 1) {
-        gMeme.selectedLineIdx = 0
-    }
-    //need to chack if is goo to rander
+    changeLine()
     onEditInCanvas()
 }
 
 function onAddLine() {
-    var x = 40;
-    var y;
-    if (gMeme.lines.length === 0) {
-        y = 40
-    } else if (gMeme.lines.length === 1) {
-        y = 192
-    } else if (gMeme.lines.length === 2) {
-        y = 340
+    var newLine = addLine()
+    if (newLine) {
+        onEditInCanvas(false, { x: newLine.x, y: newLine.y })
     }
-    if (gMeme.lines.length > 2) {
-        return
-    }
-    gMeme.lines.push({
-        txt: 'hallo',
-        size: 20,
-        align: 'left',
-        color: 'red',
-        font: 'Impact',
-        pos: { x: x, y: y }
-    })
-    onEditInCanvas(false, { x: x, y: y })
 }
 
 function onDeleteLine() {
-    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-        //CHACK IF DELETE ===0 
-    if (gMeme.selectedLineIdx > 0) {
-        gMeme.selectedLineIdx--
-    }
+    deleteLine()
     onEditInCanvas()
 }
 
 function incDecLetters(get) {
-    if (get) {
-        gMeme.lines[gMeme.selectedLineIdx].size++
-    } else {
-        gMeme.lines[gMeme.selectedLineIdx].size--
-    }
+    changeFontSize(get)
     onEditInCanvas()
 }
 
-function alignLetters(align) {
-    gMeme.lines[gMeme.selectedLineIdx].align = align
+function onAlignLetters(align) {
+    alignLetters(align)
     onEditInCanvas()
 }
 
-function changeColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].color = color
+function onChangeColor(newColor) {
+    changeColor(newColor)
     onEditInCanvas()
 }
 
-function onChangeFont(font) {
-    gMeme.lines[gMeme.selectedLineIdx].font = font
+function onChangeFont(newFont) {
+    changeFont(newFont)
     onEditInCanvas()
 }
 
-function downloadCanvas(elLink) {
-    const data = gElCanvas.toDataURL();
-    elLink.href = data;
-}
+function onDownloadCanvas(elLink) {
+    downloadCanvas(elLink)
 
+
+}
 
 ////////////////// location onMove /////////////////////
-
-function ceangeLoc(x, y) {
-    gMeme.lines.forEach((line, idx) => {
-        if (x >= line.pos.x && x <= line.pos.x + 460 &&
-            y >= line.pos.y && y <= line.pos.y + 110
-        ) {
-            gMeme.lines[idx].pos.y = y
-            gMeme.lines[idx].pos.x = x
-        }
-    })
-}
 
 function addListeners() {
     addMouseListeners()
@@ -250,14 +239,20 @@ function addTouchListeners() {
 }
 
 function onDown(ev) {
-    gStartPos = getEvPos(ev)
+    const pos = getEvPos(ev)
+    if (!isInLine(pos)) return
     gisDrag = true
+    gStartPos = pos
     document.body.style.cursor = 'grabbing'
 }
 
 function onMove(ev) {
     if (gisDrag) {
-        onEditInCanvas(null, getEvPos(ev))
+        const pos = getEvPos(ev)
+        const dy = pos.y - gStartPos.y
+        gStartPos = pos
+        moveLine(pos)
+        onEditInCanvas(null, pos)
     }
 }
 
