@@ -147,6 +147,8 @@ body.selected-btn-memes .gallery-btn-head:nth-child(2) {
 .more-opt-search {
     font-size: 1.125rem;
     width: 5.75em;
+    height: 2.25rem;
+    color: #ffffff;
     border-radius: 3em;
     background: rgb(17, 157, 175);
     background: linear-gradient(90deg, rgba(17, 157, 175, 1) 0%, rgba(33, 173, 144, 1) 52%, rgba(46, 185, 121, 1) 100%);
