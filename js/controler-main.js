@@ -63,7 +63,6 @@ function make_base(imgEdit, posX, posY) {
     base_image.src = imgEdit
     base_image.onload = function() {
         gCtx.drawImage(base_image, 0, 0);
-        // ceangeLoc(posX, posY)
         randerTxtInCanvas(posX, posY)
     }
 }
@@ -71,7 +70,6 @@ function make_base(imgEdit, posX, posY) {
 ////////////////// rander txt on canvas /////////////////////
 
 function randerTxtInCanvas() {
-
     meme.lines.forEach((line, idx) => {
         drawText(line.txt, line.size, line.color, line.pos.x, line.pos.y, line.align, idx, line.font)
     })
@@ -92,7 +90,7 @@ function drawText(txt, size, color, x, y, align, line, font) {
         drewLineMove()
     }
 
-    gCtx.lineWidth = 1;
+    gCtx.lineWidth = 1.8;
     gCtx.strokeStyle = 'white'
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font} `
@@ -134,6 +132,9 @@ function toggleMenu() {
 }
 
 ////////////////// ON EVENT FUNCTION /////////////////////
+function moreOptionMobile() {
+    document.body.classList.toggle('open-more-tools')
+}
 
 function onMyMemesBtn() {
     showMyMemes(true)
@@ -142,6 +143,8 @@ function onMyMemesBtn() {
     document.querySelector('.editor-gallery-container').style.display = 'none'
     document.body.classList.remove('selected-btn-gallery')
     document.body.classList.add('selected-btn-memes')
+    document.body.classList.remove('menu-open')
+
 }
 
 function onSaveMeme() {

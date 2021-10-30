@@ -51,8 +51,9 @@ function saveMeme() {
     if (!isExists) {
         gMemesUser.push(gImgs[gMeme.selectedImgId])
         _saveBooksToStorage()
+        alert('Saved successfully')
     } else {
-        alert('The image is already with you')
+        alert('You already have the picture')
     }
 }
 
@@ -68,9 +69,14 @@ function changeTxt(newTxt) {
 
 function changeFontSize(get) {
     if (get) {
-        gMeme.lines[gSelectedLineIdx].size++
+        gMeme.lines[gSelectedLineIdx].size += 5
+        console.log(gMeme.lines[gSelectedLineIdx].size);
     } else {
-        gMeme.lines[gSelectedLineIdx].size--
+        if (gMeme.lines[gSelectedLineIdx].size > 5) {
+            gMeme.lines[gSelectedLineIdx].size -= 5
+            console.log(gMeme.lines[gSelectedLineIdx].size);
+
+        }
     }
 }
 
