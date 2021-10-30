@@ -47,9 +47,9 @@ function loadMemes() {
 
 function saveMeme() {
     loadMemes()
-    var isExists = gMemesUser.find(img => img.id === gImgs[gMeme.selectedImgId].id)
+    var isExists = gMemesUser.find(img => img.id === gImgs[gMeme.selectedImgId-1].id)
     if (!isExists) {
-        gMemesUser.push(gImgs[gMeme.selectedImgId])
+        gMemesUser.push(gImgs[gMeme.selectedImgId-1])
         _saveBooksToStorage()
         alert('Saved successfully')
     } else {
