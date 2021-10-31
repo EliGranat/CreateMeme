@@ -15,13 +15,13 @@
         <div class="logo">logo</div>
         <div class="btn-logo-mobile" onclick="toggleMenu()"></div>
         <div class="btn-header">
-            <button class="gallery-btn-head selected-btn-gallery" onclick="goToGalleryBtn()">Gallery</button>
-            <button class="gallery-btn-head " onclick="onMyMemesBtn()">Memes</button>
+            <button class=" selected-btn-gallery" onclick="goToGalleryBtn()">Gallery</button>
+            <button onclick="onMyMemesBtn()">Memes</button>
             <a class="about-btn-head" href="https://eligranat.github.io/portfolio/" target="_blank">About</a>
         </div>
     </header>
     <main>
-        <section class="gallery-container ">
+        <section class="gallery-container">
             <div class=" container-btn-galery">
                 <div class="search-gallery">
 
@@ -31,13 +31,7 @@
                 <div class="opt-gallery">
 
                     <div class="opt-search-gallery">
-                        <div onclick="onFilterBy('men',this)" class="men">Men</div>
-                        <div onclick="onFilterBy('comic',this)" class="comic">comic</div>
-                        <div onclick="onFilterBy('funny',this)" class="funny">Funny</div>
-                        <div onclick="onFilterBy('animal',this)" class="animal">Animal</div>
-                        <div onclick="onFilterBy('smile',this)" class="smile">smile</div>
-                        <div onclick="onFilterBy('women',this)" class="women">Women</div>
-                        <div onclick="onFilterBy('all',this)" class="all">All</div>
+
                     </div>
                     <button class="more-opt-search" onclick="showMoreFilter()">More</button>
                 </div>
@@ -47,7 +41,8 @@
                 <div class="container-images"></div>
             </div>
         </section>
-        <section class="editor-gallery-container">
+
+        <section class="editor-canvas-container">
             <canvas class="container-canvas" height="500" width="500" style="background-color: aquamarine;">
             </canvas>
             <div class="hide-show-focus" onclick="hideFocus()"></div>
@@ -64,8 +59,8 @@
                 </div>
 
                 <div class="container-tools-edit-canvas">
-                    <div class="increase-letters" onclick="incDecLetters(1)"></div>
-                    <div class="decrease-letters" onclick="incDecLetters(0)"></div>
+                    <div class="increase-letters" onclick="onFontSize(1)"></div>
+                    <div class="decrease-letters" onclick="onFontSize(0)"></div>
                     <div class="ltr-letters" onclick="onAlignLetters('left')"> </div>
                     <div class="center-letters" onclick="onAlignLetters('center')"> </div>
                     <div class="rtl-letters" onclick="onAlignLetters('right')"> </div>
