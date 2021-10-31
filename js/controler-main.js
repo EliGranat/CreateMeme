@@ -15,31 +15,36 @@ function init() {
     gElCanvas = document.querySelector('.container-canvas')
     gCtx = gElCanvas.getContext('2d')
     randerGridImg()
+    randerFilter()
     addListeners()
 }
 
 ////////////////// filter by /////////////////////
 
-function onFilterBy(filter) {
+
+
+function onFilterBy(filter, idx) {
     changeFilter(filter)
+    const filters = gettFilters()
+    filters[idx].size += 10
     randerGridImg()
-    var elFilter = document.querySelector(`.${filter}`)
-    var fontSizeFilterA = '15px'
-    var fontSizeFilterB = '22px'
-    var fontSizeFilterC = '30px'
-    if (elFilter.style.fontSize !== '15px' && elFilter.style.fontSize !== '22px' && elFilter.style.fontSize !== '30px') {
-        elFilter.style.fontSize = fontSizeFilterA
-    } else if (elFilter.style.fontSize !== '22px' && elFilter.style.fontSize !== '30px') {
-        elFilter.style.fontSize = fontSizeFilterB
-    } else if (elFilter !== '30px') {
-        elFilter.style.fontSize = fontSizeFilterC
-    }
+    randerFilter()
 }
 
+function randerFilter() {
+    const elFilters = document.querySelector('.opt-search-gallery')
+    const filters = gettFilters()
+    var elHTML = ''
+    filters.forEach((filter, idx) => {
+        elHTML += `<div onclick="onFilterBy('${filter.name}',${idx})" style="font-size: ${filter.size}px">${filter.txt} </div>`
+    })
+    elFilters.innerHTML = elHTML
+}
 ////////////////// render grid imgs /////////////////////
 
 function randerGridImg() {
-    var imgs = gettImages()
+    var imgs = gettImagesF()
+    console.log(imgs);
     var elGridImgHtml = ''
     imgs.forEach(img => {
         elGridImgHtml += ` <img src="${img.url}" onclick="onEditInCanvas(${img.id})">`
@@ -49,27 +54,32 @@ function randerGridImg() {
 
 ////////////////// on click update on canvas first img after txt /////////////////////
 
-function onEditInCanvas(id, pos = { x: 10, y: 40 }) {
+function onEditInCanvas(id) {
     if (id) {
         meme.selectedImgId = id
         document.querySelector('.gallery-container').style.display = 'none'
-        document.querySelector('.editor-gallery-container').style.display = 'flex'
+        document.querySelector('.editor-canvas-container').style.display = 'flex'
+    } else if (isInput()) {
+        make_base(gettImgInput().src)
+        return
     }
-    make_base(`./img/meme-imgs/${meme.selectedImgId}.jpg`, pos.x, pos.y)
+    var imgs = gettAllImgs()
+    make_base(imgs[meme.selectedImgId - 1].url)
 }
 
-function make_base(imgEdit, posX, posY) {
+function make_base(imgEdit) {
     var base_image = new Image()
     base_image.src = imgEdit
     base_image.onload = function() {
-        gCtx.drawImage(base_image, 0, 0);
-        randerTxtInCanvas(posX, posY)
+        gCtx.drawImage(base_image, 0, 0, gElCanvas.width, gElCanvas.height);
+        randerTxtInCanvas()
     }
 }
 
 ////////////////// rander txt on canvas /////////////////////
 
 function randerTxtInCanvas() {
+    console.log(meme);
     meme.lines.forEach((line, idx) => {
         drawText(line.txt, line.size, line.color, line.pos.x, line.pos.y, line.align, idx, line.font)
     })
@@ -118,11 +128,12 @@ function drewLineMove() {
 
 function goToGalleryBtn() {
     document.querySelector('.gallery-container').style.display = 'flex'
-    document.querySelector('.editor-gallery-container').style.display = 'none'
+    document.querySelector('.editor-canvas-container').style.display = 'none'
     document.body.classList.remove('selected-btn-memes')
     document.body.classList.add('selected-btn-gallery')
     document.body.classList.remove('menu-open')
     showMyMemes(false)
+    isInput(false)
     randerGridImg()
 
 }
@@ -140,10 +151,12 @@ function onMyMemesBtn() {
     showMyMemes(true)
     randerGridImg()
     document.querySelector('.gallery-container').style.display = 'flex'
-    document.querySelector('.editor-gallery-container').style.display = 'none'
+    document.querySelector('.editor-canvas-container').style.display = 'none'
     document.body.classList.remove('selected-btn-gallery')
     document.body.classList.add('selected-btn-memes')
     document.body.classList.remove('menu-open')
+    isInput(false)
+
 
 }
 
@@ -187,7 +200,7 @@ function onChangeLine() {
 function onAddLine() {
     var newLine = addLine()
     if (newLine) {
-        onEditInCanvas(false, { x: newLine.x, y: newLine.y })
+        onEditInCanvas()
     }
 }
 
@@ -196,7 +209,7 @@ function onDeleteLine() {
     onEditInCanvas()
 }
 
-function incDecLetters(get) {
+function onFontSize(get) {
     changeFontSize(get)
     onEditInCanvas()
 }
@@ -252,10 +265,9 @@ function onDown(ev) {
 function onMove(ev) {
     if (gisDrag) {
         const pos = getEvPos(ev)
-        const dy = pos.y - gStartPos.y
         gStartPos = pos
         moveLine(pos)
-        onEditInCanvas(null, pos)
+        onEditInCanvas()
     }
 }
 

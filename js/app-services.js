@@ -1,7 +1,16 @@
 'use strict'
 var gFilterBy = 'all'
 var gFilterImg = []
-const gFilters = ['women', 'smile', 'animal', 'funny', 'comic', 'men', 'all']
+
+const gFilters = [
+    { name: 'men', txt: 'Men', size: 40 },
+    { name: 'comic', txt: 'Comic', size: 15 },
+    { name: 'funny', txt: 'Funny', size: 40 },
+    { name: 'animal', txt: 'Animal', size: 15 },
+    { name: 'smile', txt: 'Smile', size: 15 },
+    { name: 'women', txt: 'Women', size: 15 },
+    { name: 'all', txt: 'All', size: 15 },
+]
 var gImgs = []
 var gSelectedLineIdx = 0;
 var gMemesUser = []
@@ -19,7 +28,7 @@ var gMeme = {
         selected: true
     }]
 }
-createImgs()
+_createImgs()
 
 function gettSelected() {
     return gSelectedLineIdx
@@ -27,6 +36,14 @@ function gettSelected() {
 
 function gettGmeme() {
     return gMeme
+}
+
+function gettFilters() {
+    return gFilters
+}
+
+function gettAllImgs() {
+    return gImgs
 }
 /////////////////// MEMES ON STORAGE ////////////////////
 function showMyMemes(show) {
@@ -47,9 +64,9 @@ function loadMemes() {
 
 function saveMeme() {
     loadMemes()
-    var isExists = gMemesUser.find(img => img.id === gImgs[gMeme.selectedImgId-1].id)
+    var isExists = gMemesUser.find(img => img.id === gImgs[gMeme.selectedImgId - 1].id)
     if (!isExists) {
-        gMemesUser.push(gImgs[gMeme.selectedImgId-1])
+        gMemesUser.push(gImgs[gMeme.selectedImgId - 1])
         _saveBooksToStorage()
         alert('Saved successfully')
     } else {
@@ -152,12 +169,12 @@ function moveLine({ x, y }) {
 
 ///////////////CREATE ARAAY IMGS ////////////////
 
-function createImgs() {
-    for (var i = 0; i < 17; i++) {
+function _createImgs() {
+    for (var i = 0; i < 54; i++) {
         gImgs.push({
             id: `${i+1}`,
             url: `./img/meme-imgs/${i+1}.jpg`,
-            keyword: [`${getRandomFilter()}`, `${getRandomFilter()}`, `${getRandomFilter()} `, 'all']
+            keyword: [`${_getRandomFilter()}`, `${_getRandomFilter()}`, `${_getRandomFilter()} `, 'all']
         })
     }
 }
@@ -165,18 +182,18 @@ function createImgs() {
 ////////////// FILTER ////////////////
 
 function search(value) {
-    const searchBy = gFilters.find(filter => value === filter)
+    const searchBy = gFilters.find(filter => value === filter.name)
     if (searchBy) {
-        changeFilter(searchBy)
+        changeFilter(searchBy.name)
     }
 }
 
-function getRandomFilter() {
+function _getRandomFilter() {
     var numRandom = getRandomInt(1, 7)
-    return gFilters[numRandom - 1]
+    return gFilters[numRandom - 1].name
 }
 
-function filterBy() {
+function _filterBy() {
     gFilterImg = []
     var imgs = !gIsUserMeme ? gImgs : gMemesUser
     imgs.map(img => {
@@ -187,16 +204,14 @@ function filterBy() {
             gFilterImg.push(img)
         }
     })
-
-
 }
 
 function changeFilter(filter) {
     gFilterBy = filter
 }
 
-function gettImages() {
-    filterBy()
+function gettImagesF() {
+    _filterBy()
     return gFilterImg
 
 }

@@ -1,5 +1,6 @@
 'use strict'
-var gImg
+var gImgInput
+var gIsInput = false
 
 function downloadCanvas(elLink) {
     const data = gElCanvas.toDataURL();
@@ -52,11 +53,24 @@ function loadImageFromInput(ev, onImageReady) {
         var img = new Image()
         img.onload = onImageReady.bind(null, img)
         img.src = event.target.result
-        gImg = img
+        gImgInput = img
+        gIsInput = true
     }
     reader.readAsDataURL(ev.target.files[0])
 }
 
 function renderImg(img) {
-    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+    make_base(img.src)
+}
+
+function isInput(change = true) {
+    if (!change) {
+        gIsInput = false
+    } else {
+        return gIsInput
+    }
+}
+
+function gettImgInput() {
+    return gImgInput
 }
