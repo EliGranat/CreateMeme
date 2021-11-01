@@ -299,7 +299,7 @@ body.menu-open .screen-background {
     }
     .gallery-container {
         width: 100vw;
-        max-height: 566px;
+        max-height: 80vh;
         max-width: 1243px;
         margin-left: 10px;
     }
